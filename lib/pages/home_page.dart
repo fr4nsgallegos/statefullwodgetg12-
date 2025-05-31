@@ -108,11 +108,36 @@ class _HomePageState extends State<HomePage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(menuMap["nombre"], style: TextStyle(fontSize: 22)),
-                Text(menuMap["dias"], style: TextStyle(fontSize: 18)),
+                Text(
+                  menuMap["nombre"],
+                  style: TextStyle(
+                    fontSize: 22,
+                    color:
+                        menuMap["isSelected"] == true
+                            ? Colors.white
+                            : Colors.black,
+                  ),
+                ),
+                Text(
+                  menuMap["dias"],
+                  style: TextStyle(
+                    fontSize: 18,
+                    color:
+                        menuMap["isSelected"] == true
+                            ? Colors.white
+                            : Colors.black,
+                  ),
+                ),
                 Text(
                   "S/ . ${menuMap["precio"]} ",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color:
+                        menuMap["isSelected"] == true
+                            ? Colors.white
+                            : Colors.black,
+                  ),
                 ),
               ],
             ),
