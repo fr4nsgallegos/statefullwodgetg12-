@@ -14,6 +14,5 @@ List<DeporteModel> deportModelList = [
   DeporteModel("Natación"),
   DeporteModel("Paracaidismo"),
   DeporteModel("Kaiac"),
-  DeporteModel("Atletismo"),
   DeporteModel("Caminata"),
 ];

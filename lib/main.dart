@@ -4,6 +4,9 @@ import 'package:stafullwidgetg12/pages/home_page.dart';
 
 void main() {
   runApp(
-    MaterialApp(home: DeportesFavoritos(), debugShowCheckedModeBanner: false),
+    MaterialApp(
+      home: DeportesFavoritosPage(),
+      debugShowCheckedModeBanner: false,
+    ),
   );
 }

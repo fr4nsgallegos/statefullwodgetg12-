@@ -1,50 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:stafullwidgetg12/models/deporte_model.dart';
+import 'package:stafullwidgetg12/widgets/deporte_boton_widget.dart';
 
-class DeportesFavoritos extends StatefulWidget {
-  const DeportesFavoritos({super.key});
+class DeportesFavoritosPage extends StatefulWidget {
+  const DeportesFavoritosPage({super.key});
 
   @override
-  State<DeportesFavoritos> createState() => _DeportesFavoritosState();
+  State<DeportesFavoritosPage> createState() => _DeportesFavoritosPageState();
 }
 
-class _DeportesFavoritosState extends State<DeportesFavoritos> {
+class _DeportesFavoritosPageState extends State<DeportesFavoritosPage> {
   List<DeporteModel> favoriteDeportList = [];
-  Widget deporteBoton(DeporteModel deporteModel, bool isOnBoxContainer) {
-    return ElevatedButton(
-      onPressed: () {
-        if (!deporteModel.isFavorite) {
-          deporteModel.isFavorite = true;
-          favoriteDeportList.add(deporteModel);
-        } else {
-          deporteModel.isFavorite = false;
-          favoriteDeportList.remove(deporteModel);
-        }
-        setState(() {});
-      },
-      child: Text(deporteModel.name),
-      style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
 
-        backgroundColor:
-            isOnBoxContainer == true
-                ? Colors.white
-                : deporteModel.isFavorite == true
-                ? Colors.orange
-                : Colors.white,
-        foregroundColor:
-            isOnBoxContainer == true
-                ? Colors.black
-                : deporteModel.isFavorite == true
-                ? Colors.white
-                : Colors.black,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-          side: BorderSide(color: Colors.orange, width: 2),
-        ),
-      ),
-    );
-  }
+  // ESTO LO HEMOS CONVERTIDO A UN STATLESWIDGET DENTRO DE LA CARPETA WIDGET
+  // Widget deporteBoton(DeporteModel deporteModel, bool isOnBoxContainer) {
+  //   return ElevatedButton(
+  //     onPressed: () {
+  //       if (!deporteModel.isFavorite) {
+  //         deporteModel.isFavorite = true;
+  //         favoriteDeportList.add(deporteModel);
+  //       } else {
+  //         deporteModel.isFavorite = false;
+  //         favoriteDeportList.remove(deporteModel);
+  //       }
+  //       setState(() {});
+  //     },
+  //     child: Text(deporteModel.name),
+  //     style: ElevatedButton.styleFrom(
+  //       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+
+  //       backgroundColor:
+  //           isOnBoxContainer == true
+  //               ? Colors.white
+  //               : deporteModel.isFavorite == true
+  //               ? Colors.orange
+  //               : Colors.white,
+  //       foregroundColor:
+  //           isOnBoxContainer == true
+  //               ? Colors.black
+  //               : deporteModel.isFavorite == true
+  //               ? Colors.white
+  //               : Colors.black,
+  //       shape: RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.circular(10),
+  //         side: BorderSide(color: Colors.orange, width: 2),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +87,21 @@ class _DeportesFavoritosState extends State<DeportesFavoritos> {
                 alignment: WrapAlignment.spaceAround,
                 children: [
                   for (int i = 0; i < deportModelList.length; i++)
-                    deporteBoton(deportModelList[i], false),
+                    // deporteBoton(deportModelList[i], false),
+                    DeporteBotonWidget(
+                      deporteModel: deportModelList[i],
+                      isOnBoxContainer: false,
+                      onTap: () {
+                        if (!deportModelList[i].isFavorite) {
+                          deportModelList[i].isFavorite = true;
+                          favoriteDeportList.add(deportModelList[i]);
+                        } else {
+                          deportModelList[i].isFavorite = false;
+                          favoriteDeportList.remove(deportModelList[i]);
+                        }
+                        setState(() {});
+                      },
+                    ),
                 ],
               ),
             ),
@@ -108,7 +125,16 @@ class _DeportesFavoritosState extends State<DeportesFavoritos> {
                 alignment: WrapAlignment.spaceAround,
                 children: [
                   for (int i = 0; i < favoriteDeportList.length; i++)
-                    deporteBoton(favoriteDeportList[i], true),
+                    // deporteBoton(favoriteDeportList[i], true),
+                    DeporteBotonWidget(
+                      deporteModel: favoriteDeportList[i],
+                      isOnBoxContainer: true,
+                      onTap: () {
+                        favoriteDeportList[i].isFavorite = false;
+                        favoriteDeportList.remove(favoriteDeportList[i]);
+                        setState(() {});
+                      },
+                    ),
                 ],
               ),
             ),
