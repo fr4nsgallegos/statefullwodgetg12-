@@ -1,0 +1,5 @@
+package com.example.stafullwidgetg12
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity : FlutterActivity()
