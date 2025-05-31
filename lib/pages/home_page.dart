@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   List<Map<String, dynamic>> listMenuMaps = [
     {
       "nombre": "Menu 1",
@@ -8,6 +13,7 @@ class HomePage extends StatelessWidget {
       "precio": 5,
       "urlImage":
           "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "isSelected": false,
     },
     {
       "nombre": "Menu 2",
@@ -15,6 +21,7 @@ class HomePage extends StatelessWidget {
       "precio": 6,
       "urlImage":
           "https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "isSelected": false,
     },
     {
       "nombre": "Menu 3",
@@ -22,6 +29,7 @@ class HomePage extends StatelessWidget {
       "precio": 7,
       "urlImage":
           "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "isSelected": false,
     },
     {
       "nombre": "Menu 4",
@@ -29,6 +37,7 @@ class HomePage extends StatelessWidget {
       "precio": 8,
       "urlImage":
           "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "isSelected": false,
     },
     {
       "nombre": "Menu 5",
@@ -36,27 +45,37 @@ class HomePage extends StatelessWidget {
       "precio": 10,
       "urlImage":
           "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "isSelected": false,
     },
   ];
+  int? selectedMenuIndex;
 
-  Widget buildMenuCard(double widthPageAux, Map<String, dynamic> menuMap) {
+  Widget buildMenuCard(
+    double widthPageAux,
+    Map<String, dynamic> menuMap,
+    int index,
+  ) {
+    menuMap["isSelected"] = selectedMenuIndex == index;
     return GestureDetector(
       onTap: () {
-        print(menuMap);
+        selectedMenuIndex = menuMap["isSelected"] == true ? null : index;
+        // selectedMenuIndex = index;
+        // menuMap["isSelected"] = !menuMap["isSelected"];
+        // print(menuMap["isSelected"]);
+        setState(() {});
       },
-      onDoubleTap: () {
-        print("Dos taps");
-      },
-      onLongPress: () {
-        print("Long presss ${menuMap["nombre"]}");
-      },
+
       child: Container(
         margin: EdgeInsets.only(top: 10),
         padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color:
+              menuMap["isSelected"] == true ? Color(0xffFDD770) : Colors.white,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.black, width: 2),
+          border: Border.all(
+            color: menuMap["isSelected"] == true ? Colors.white : Colors.black,
+            width: 2,
+          ),
         ),
         child: Row(
           children: [
@@ -129,7 +148,7 @@ class HomePage extends StatelessWidget {
               ),
               Column(
                 children: List.generate(listMenuMaps.length, (index) {
-                  return buildMenuCard(widthPage, listMenuMaps[index]);
+                  return buildMenuCard(widthPage, listMenuMaps[index], index);
                 }),
               ),
 
