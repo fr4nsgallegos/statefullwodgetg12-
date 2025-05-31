@@ -9,10 +9,17 @@ class DeportesFavoritos extends StatefulWidget {
 }
 
 class _DeportesFavoritosState extends State<DeportesFavoritos> {
-  Widget deporteBoton(DeporteModel deporteModel) {
+  List<DeporteModel> favoriteDeportList = [];
+  Widget deporteBoton(DeporteModel deporteModel, bool isOnBoxContainer) {
     return ElevatedButton(
       onPressed: () {
-        deporteModel.isFavorite = !deporteModel.isFavorite;
+        if (!deporteModel.isFavorite) {
+          deporteModel.isFavorite = true;
+          favoriteDeportList.add(deporteModel);
+        } else {
+          deporteModel.isFavorite = false;
+          favoriteDeportList.remove(deporteModel);
+        }
         setState(() {});
       },
       child: Text(deporteModel.name),
@@ -20,9 +27,17 @@ class _DeportesFavoritosState extends State<DeportesFavoritos> {
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
 
         backgroundColor:
-            deporteModel.isFavorite == true ? Colors.orange : Colors.white,
+            isOnBoxContainer == true
+                ? Colors.white
+                : deporteModel.isFavorite == true
+                ? Colors.orange
+                : Colors.white,
         foregroundColor:
-            deporteModel.isFavorite == true ? Colors.white : Colors.black,
+            isOnBoxContainer == true
+                ? Colors.black
+                : deporteModel.isFavorite == true
+                ? Colors.white
+                : Colors.black,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
           side: BorderSide(color: Colors.orange, width: 2),
@@ -69,7 +84,7 @@ class _DeportesFavoritosState extends State<DeportesFavoritos> {
                 alignment: WrapAlignment.spaceAround,
                 children: [
                   for (int i = 0; i < deportModelList.length; i++)
-                    deporteBoton(deportModelList[i]),
+                    deporteBoton(deportModelList[i], false),
                 ],
               ),
             ),
@@ -80,13 +95,22 @@ class _DeportesFavoritosState extends State<DeportesFavoritos> {
             ),
             SizedBox(height: 16),
             Container(
+              padding: EdgeInsets.all(12),
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 2,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
                 border: Border.all(color: Colors.black, width: 2),
               ),
-              child: Wrap(),
+              child: Wrap(
+                spacing: 8, //espaciado horizontal entre los elementos
+                runSpacing: 2, //espaciado vertical entre las filas
+                alignment: WrapAlignment.spaceAround,
+                children: [
+                  for (int i = 0; i < favoriteDeportList.length; i++)
+                    deporteBoton(favoriteDeportList[i], true),
+                ],
+              ),
             ),
           ],
         ),
