@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stafullwidgetg12/models/menu_model.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -52,13 +53,14 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildMenuCard(
     double widthPageAux,
-    Map<String, dynamic> menuMap,
+    // Map<String, dynamic> menuMap,
+    MenuModel menuModel,
     int index,
   ) {
-    menuMap["isSelected"] = selectedMenuIndex == index;
+    menuModel.isSelected = selectedMenuIndex == index;
     return GestureDetector(
       onTap: () {
-        selectedMenuIndex = menuMap["isSelected"] == true ? null : index;
+        selectedMenuIndex = menuModel.isSelected == true ? null : index;
         // selectedMenuIndex = index;
         // menuMap["isSelected"] = !menuMap["isSelected"];
         // print(menuMap["isSelected"]);
@@ -70,10 +72,10 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
           color:
-              menuMap["isSelected"] == true ? Color(0xffFDD770) : Colors.white,
+              menuModel.isSelected == true ? Color(0xffFDD770) : Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: menuMap["isSelected"] == true ? Colors.white : Colors.black,
+            color: menuModel.isSelected == true ? Colors.white : Colors.black,
             width: 2,
           ),
         ),
@@ -83,7 +85,7 @@ class _HomePageState extends State<HomePage> {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
-                menuMap["urlImage"],
+                menuModel.urlImage,
                 width: widthPageAux / 4,
                 height: widthPageAux / 4,
                 fit: BoxFit.cover,
@@ -109,32 +111,32 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  menuMap["nombre"],
+                  menuModel.nombre,
                   style: TextStyle(
                     fontSize: 22,
                     color:
-                        menuMap["isSelected"] == true
+                        menuModel.isSelected == true
                             ? Colors.white
                             : Colors.black,
                   ),
                 ),
                 Text(
-                  menuMap["dias"],
+                  menuModel.dias,
                   style: TextStyle(
                     fontSize: 18,
                     color:
-                        menuMap["isSelected"] == true
+                        menuModel.isSelected == true
                             ? Colors.white
                             : Colors.black,
                   ),
                 ),
                 Text(
-                  "S/ . ${menuMap["precio"]} ",
+                  "S/ . ${menuModel.precio} ",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color:
-                        menuMap["isSelected"] == true
+                        menuModel.isSelected == true
                             ? Colors.white
                             : Colors.black,
                   ),
@@ -173,7 +175,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Column(
                 children: List.generate(listMenuMaps.length, (index) {
-                  return buildMenuCard(widthPage, listMenuMaps[index], index);
+                  return buildMenuCard(widthPage, listMenuModel[index], index);
                 }),
               ),
 
