@@ -45,19 +45,31 @@ class _DeportesFavoritosState extends State<DeportesFavoritos> {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
 
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-              child: Text("Gimnasio"),
-              decoration: BoxDecoration(
-                // color: Colors.red,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.orange, width: 2),
-              ),
+            // Container(
+            //   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+            //   child: Text("Gimnasio"),
+            //   decoration: BoxDecoration(
+            //     // color: Colors.red,
+            //     borderRadius: BorderRadius.circular(10),
+            //     border: Border.all(color: Colors.orange, width: 2),
+            //   ),
+            // ),
+            Wrap(
+              spacing: 8, //espaciado horizontal entre los elementos
+              runSpacing: 2, //espaciado vertical entre las filas
+              alignment: WrapAlignment.spaceAround,
+              children: [
+                deporteBoton("Gimnasio"),
+                deporteBoton("Gimnasio"),
+                deporteBoton("Golf"),
+                deporteBoton("Fútbol"),
+                deporteBoton("Golf"),
+                deporteBoton("Golf"),
+                deporteBoton("Fútbol"),
+                deporteBoton("Fútbol"),
+                deporteBoton("Fútbol"),
+              ],
             ),
-
-            deporteBoton("Gimnasio"),
-            deporteBoton("Golf"),
-            deporteBoton("Fútbol"),
           ],
         ),
       ),
