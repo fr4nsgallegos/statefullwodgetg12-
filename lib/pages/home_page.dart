@@ -1,7 +1,45 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  Widget buildMenuCard(double widthPageAux) {
+  List<Map<String, dynamic>> listMenuMaps = [
+    {
+      "nombre": "Menu 1",
+      "dias": "Lun - Mar - Mie",
+      "precio": 5,
+      "urlImage":
+          "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      "nombre": "Menu 2",
+      "dias": "Lun - Mie",
+      "precio": 6,
+      "urlImage":
+          "https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      "nombre": "Menu 3",
+      "dias": "Mar - Mie",
+      "precio": 7,
+      "urlImage":
+          "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      "nombre": "Menu 4",
+      "dias": "Vie - Sab",
+      "precio": 8,
+      "urlImage":
+          "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      "nombre": "Menu 5",
+      "dias": "Dom",
+      "precio": 10,
+      "urlImage":
+          "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+  ];
+
+  Widget buildMenuCard(double widthPageAux, Map<String, dynamic> menuMap) {
     return Container(
       margin: EdgeInsets.only(top: 16),
       padding: EdgeInsets.all(12),
@@ -16,7 +54,7 @@ class HomePage extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.network(
-              "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+              menuMap["urlImage"],
               width: widthPageAux / 4,
               height: widthPageAux / 4,
               fit: BoxFit.cover,
@@ -41,10 +79,10 @@ class HomePage extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Menú 1", style: TextStyle(fontSize: 22)),
-              Text("Lun - Mie - Vier", style: TextStyle(fontSize: 18)),
+              Text(menuMap["nombre"], style: TextStyle(fontSize: 22)),
+              Text(menuMap["dias"], style: TextStyle(fontSize: 18)),
               Text(
-                "S/ . 5 ",
+                "S/ . ${menuMap["precio"]} ",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ],
@@ -78,9 +116,15 @@ class HomePage extends StatelessWidget {
                 "Selecciona tu mejor opción",
                 style: TextStyle(fontSize: 24),
               ),
-              buildMenuCard(widthPage),
-              buildMenuCard(widthPage),
-              buildMenuCard(widthPage),
+              Column(
+                children: List.generate(listMenuMaps.length, (index) {
+                  return buildMenuCard(widthPage, listMenuMaps[index]);
+                }),
+              ),
+
+              // buildMenuCard(widthPage),
+              // buildMenuCard(widthPage),
+              // buildMenuCard(widthPage),
             ],
           ),
         ),
