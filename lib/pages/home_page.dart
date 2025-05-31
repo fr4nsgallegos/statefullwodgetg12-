@@ -27,15 +27,38 @@ class HomePage extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.only(top: 16),
-                padding: EdgeInsets.all(16),
-                color: Colors.red,
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.black, width: 2),
+                ),
                 child: Row(
                   children: [
-                    Image.network(
-                      "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    // PRIMERA OPCIÓN PARA PONER BORDER REDONDEADOS EN UNA IMAGEN
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.network(
+                        "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                        width: widthPage / 4,
+                        height: widthPage / 4,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+
+                    // SEGUNDA FORMA PARA PONER BORDES REONDEADOS PARA UNA IMAGEN
+                    Container(
                       width: widthPage / 4,
                       height: widthPage / 4,
-                      fit: BoxFit.cover,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                     SizedBox(width: 16),
                     Column(
